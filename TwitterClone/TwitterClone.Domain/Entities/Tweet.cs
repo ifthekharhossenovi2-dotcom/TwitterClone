@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,24 +6,20 @@ using System.Threading.Tasks;
 
 namespace TwitterClone.Domain.Entities
 {
-    public class Tweet
+
+    public class Tweet : BaseEntity
     {
-        private Guid _id;
+        
         private Guid _userId;
         private string _content;
-        private DateTime _createdAt;
-        private DateTime _modifiedAt;
 
-        public Tweet()
+
+        public Tweet(string content) : base(Guid.NewGuid())
         {
-            _id = Guid.NewGuid();
-            _createdAt = DateTime.UtcNow;
+            _content = content;
         }
 
-        public Guid Id
-        {
-            get { return _id; }
-        }
+       
 
         public Guid UserId
         {
@@ -37,16 +33,12 @@ namespace TwitterClone.Domain.Entities
             set { _content = value; }
         }
 
-        public DateTime CreatedAt
-        {
-            get { return _createdAt; }
-        }
 
-        public DateTime ModifiedAt
-        {
-            get { return _modifiedAt; }
-            set { _modifiedAt = value; }
-        }
 
+        public override string DescribeRecord()
+        {
+            var baseRecord = base.DescribeRecord();
+            return $"{baseRecord}, UserId: {UserId}, Content: {Content}";
+        }
     }
 }
