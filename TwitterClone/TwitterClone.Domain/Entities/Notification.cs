@@ -35,11 +35,11 @@ namespace TwitterClone.Domain.Entities
             get { return _isRead; }
             set { _isRead = value; }
         }
-
-        public override string DescribeRecord()
+        public string GetNotificationInfo()
         {
-            var baseRecord = base.DescribeRecord();
-            return $"{baseRecord}, UserId: {UserId}, Type: {Type}, Message: {Message}, IsRead: {IsRead}";
+            return $"UserId: {_userId}, NotificationType: {_type}";
         }
+
+        public abstract string GetMessage();
     }
 }
